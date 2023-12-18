@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -6,9 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  // Paper,
   Card,
-  // Button,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -30,9 +28,31 @@ function App() {
   const [editingProject, setEditingProject] = useState(null);
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  // new states for sorting
-  // const [isSortmodalOpen, setIsSortModalOpen] = useState(false);
-  // const [sortingCriteria, setSortingCriteria] = useState("dateAdded");
+
+  // ******************************************************************
+  useEffect(() => {
+    // Update dateAdded in formData when the component mounts
+    setFormData((prevData) => ({
+      ...prevData,
+      dateAdded: getFormattedDate(),
+    }));
+  }, []); // Empty dependency array ensures that this effect runs only once, similar to componentDidMount
+
+  const getFormattedDate = () => {
+    // Get today's date
+    const today = new Date();
+
+    // Extract the components of the date
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // Month is zero-based, so we add 1
+    const day = today.getDate();
+
+    // Format the date as a string
+    return `${year}-${month < 10 ? "0" : ""}${month}-${
+      day < 10 ? "0" : ""
+    }${day}`;
+  };
+  // **********************************************************
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -54,10 +74,9 @@ function App() {
     ) {
       const newProject = { ...formData, id: new Date().getTime().toString() };
       setProjects([...projects, newProject]);
-      // clear form data
+
       setFormData({
         projectName: "",
-        dateAdded: "",
         dueDate: "",
         priority: "",
         niche: "",
@@ -77,40 +96,15 @@ function App() {
       setProjects([...projects, { ...formData, id: projects.length + 1 }]);
     }
 
-    // Clear form data
     setFormData({
       projectName: "",
-      dateAdded: "",
+      // dateAdded: "",
       dueDate: "",
       priority: "",
       niche: "",
       storyPoint: "",
     });
   };
-
-  // const sortProject = (criteria) => {
-  //   const sortedProjects = [...projects.projectName];
-  //   sortedProjects.sort((a, b) => {
-  //     switch (criteria) {
-  //       case "dateAdded":
-  //         return new Date(a.dateAdded) - new Date(b.dateAdded);
-  //       case "dateDue":
-  //         return new Date(a.dateDue) - new Date(b.dateDue);
-  //       case "priority":
-  //         return a.priority - b.priority;
-  //       case "storyPoint":
-  //         return a.storyPoint - b.storyPoint;
-  //       case "niche":
-  //         return a.niche.localeCompare(b.niche);
-  //       default:
-  //         return 0;
-  //     }
-  //   });
-
-  //   setSortingCriteria(criteria);
-  //   setProjects(sortedProjects);
-  //   setIsSortModalOpen(false);
-  // };
 
   const handleDelete = (id) => {
     const updatedProjects = projects.filter((project) => project.id !== id);
@@ -128,12 +122,6 @@ function App() {
     setEditingProject(editingProject);
     setIsEditDialogOpen(false);
   };
-
-  // const handleSort = () => {
-  //   console.log("hello");
-  //   setSortingProject(null);
-  //   setIsSortModalOpen((prev) => !prev);
-  // };
 
   return (
     <StyledEngineProvider injectFirst>
@@ -163,6 +151,7 @@ function App() {
                 type="date"
                 name="dateAdded"
                 id="dateAdded"
+                disabled
                 onChange={handleChange}
                 value={formData.dateAdded}
                 className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500"
@@ -199,6 +188,7 @@ function App() {
                 name="niche"
                 id="niche"
                 onChange={handleChange}
+                placeholder="Niche"
                 value={formData.niche}
                 className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
               />
@@ -209,6 +199,7 @@ function App() {
                 type="text"
                 name="priority"
                 id="priority"
+                placeholder="Priority"
                 onChange={handleChange}
                 value={formData.priority}
                 className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
@@ -226,21 +217,26 @@ function App() {
             <Table>
               <TableHead className="w-full">
                 <TableRow className="bg-green-500">
-                  <TableCell className="font-bold text-black">
+                  <TableCell className="font-bold text-black text-center">
                     Project Name
                   </TableCell>
-                  <TableCell className="font-bold text-black">
+                  <TableCell className="font-bold text-black text-center">
                     Date Added
                   </TableCell>
-                  <TableCell className="font-bold text-black">
+                  <TableCell className="font-bold text-black text-center">
                     Due Date
                   </TableCell>
-                  <TableCell className="font-bold text-black">
+                  <TableCell className="font-bold text-black text-center">
                     Priority
                   </TableCell>
-                  <TableCell className="font-bold text-black">Niche</TableCell>
-                  <TableCell className="font-bold text-black">
+                  <TableCell className="font-bold text-black text-center">
+                    Niche
+                  </TableCell>
+                  <TableCell className="font-bold text-black text-center">
                     Story Point
+                  </TableCell>
+                  <TableCell className="font-bold text-black text-center">
+                    Actions
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -250,52 +246,37 @@ function App() {
                     key={project.id}
                     className="border-b-2 border-solid border-green-700"
                   >
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.projectName}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.dateAdded}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.dueDate}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.priority}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.niche}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
                       {project.storyPoint}
                     </TableCell>
-                    <TableCell className="font-bold text-green-700 text-sm capitalize">
+                    <TableCell className="font-bold text-green-700 text-sm capitalize flex justify-between gap-4 sm:justify-center items-center">
                       <button
                         onClick={() => handleDelete(project.id)}
-                        // variant="outlined"
-                        color="secondary"
-                        className="text-white bg-red-700 p-1 rounded-sm font-semibold hover:bg-red-500"
+                        className="text-white bg-red-700 p-2 rounded-sm font-semibold hover:bg-red-500"
                       >
                         Delete
                       </button>
                       <button
                         onClick={() => handleEdit(project)}
-                        // variant="outlined"
-                        // color="primary"
-                        className="text-white bg-green-700 p-1 rounded-sm font-semibold hover:bg-green-500"
+                        className="text-white bg-green-700 p-2 rounded-sm font-semibold hover:bg-green-500"
                       >
                         Edit
                       </button>
-                      {/* <Button
-                      onClick={() => handleSort()}
-                      variant="outlined"
-                      color="primary"
-                      className="ml-2 text-white"
-                    >
-                      Sort by{" "}
-                      {sortingCriteria === "dateAdded"
-                        ? "Date Added"
-                        : sortingCriteria}
-                    </Button> */}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -339,6 +320,7 @@ function App() {
                     <input
                       type="date"
                       name="dateAdded"
+                      disabled
                       id="dateAdded"
                       onChange={handleChange}
                       value={formData.dateAdded}
@@ -369,7 +351,6 @@ function App() {
                       type="number"
                       name="storyPoint"
                       id="storypoint"
-                      placeholder="input number from 1 -10"
                       onChange={handleChange}
                       value={formData.storyPoint}
                       className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
@@ -405,7 +386,7 @@ function App() {
                   </div>
                 </DialogContent>
                 <DialogActions className="bg-white border-t-2 border-red-500">
-                  <div className="flex gap-4 mx-2">
+                  <div className="flex justify-center items-center gap-4">
                     <button
                       onClick={handleEditDialogClose}
                       className="bg-red-500 p-2 rounded-[8px] text-white font-bold"
@@ -423,18 +404,6 @@ function App() {
               </form>
             </div>
           </Dialog>
-
-          {/* {isSortmodalOpen && (
-          <div>
-            <button onClick={() => sortProject("dateAdded")}>Date Added</button>
-            <button onClick={() => sortProject("dateDue")}>Date Due</button>
-            <button onClick={() => sortProject("priority")}>Priority</button>
-            <button onClick={() => sortProject("storyPoint")}>
-              Story Point
-            </button>
-            <button onClick={() => sortProject("niche")}>Niche</button>
-          </div>
-        )} */}
         </div>
       </div>
     </StyledEngineProvider>
@@ -442,7 +411,3 @@ function App() {
 }
 
 export default App;
-
-// const TableCell = styled.div`
-// font-weight: bold;
-// `
