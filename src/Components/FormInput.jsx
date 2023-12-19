@@ -1,4 +1,5 @@
 // import React from 'react'
+import Tooltip from "@mui/material/Tooltip";
 
 const FormInput = ({
   handleChange,
@@ -14,15 +15,17 @@ const FormInput = ({
             <label htmlFor="name" className="text-white text-sm font-bold">
               ProjectName :
             </label>
-            <input
-              type="text"
-              name="projectName"
-              id="projectName"
-              placeholder="Project Name"
-              onChange={handleChange}
-              value={formData.projectName}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
-            />
+            <Tooltip title="Add Project Name" followCursor>
+              <input
+                type="text"
+                name="projectName"
+                id="projectName"
+                placeholder="Project Name"
+                onChange={handleChange}
+                value={formData.projectName}
+                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+              />
+            </Tooltip>
             <label htmlFor="date" className="text-white font-bold">
               Date Added :
             </label>
@@ -30,7 +33,7 @@ const FormInput = ({
               type="date"
               name="dateAdded"
               id="dateAdded"
-              disabled
+              //   disabled
               onChange={handleChange}
               value={formData.dateAdded}
               className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500"
@@ -54,6 +57,8 @@ const FormInput = ({
               type="number"
               name="storyPoint"
               id="storypoint"
+              min={1}
+              max={5}
               placeholder="input number from 1 -10"
               onChange={handleChange}
               value={formData.storyPoint}
@@ -62,27 +67,31 @@ const FormInput = ({
             <label htmlFor="niche" className="text-white font-bold">
               Niche :
             </label>
-            <input
-              type="text"
-              name="niche"
-              id="niche"
-              onChange={handleChange}
-              placeholder="Niche"
-              value={formData.niche}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
-            />
+            <Tooltip title="Add Niche" followCursor>
+              <input
+                type="text"
+                name="niche"
+                id="niche"
+                onChange={handleChange}
+                placeholder="Niche"
+                value={formData.niche}
+                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+              />
+            </Tooltip>
             <label htmlFor="Priority" className="text-white font-bold">
               Priority :
             </label>
-            <input
-              type="text"
-              name="priority"
-              id="priority"
-              placeholder="Priority"
-              onChange={handleChange}
-              value={formData.priority}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
-            />
+            <Tooltip title="high, medium, low" followCursor>
+              <input
+                type="text"
+                name="priority"
+                id="priority"
+                placeholder="Priority"
+                onChange={handleChange}
+                value={formData.priority}
+                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+              />
+            </Tooltip>
           </div>
           <button
             type="submit"
