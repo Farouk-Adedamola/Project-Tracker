@@ -21,19 +21,19 @@ const SortHelper = ({ setProjects, setSortCriteria, projects }) => {
       <div className="m-4 flex justify-center items-center gap-4">
         <button
           disabled
-          className="text-green-300 text-sm font-bold rounded-[10px] py-3 px-2 bg-white"
+          className="text-green-300 sort-btn"
           onClick={() => handleSort("dateAdded")}
         >
           Sort by Date Added
         </button>
         <button
-          className="text-red-500 font-bold rounded-[10px] text-sm p-2 py-3 px-2 bg-white"
+          className="text-red-500 sort-btn"
           onClick={() => handleSort("dueDate")}
         >
           Sort by Due Date
         </button>
         <button
-          className="text-black-500 font-bold text-sm rounded-[10px] p-2 py-3 px-2 bg-white"
+          className="text-black-500 sort-btn"
           onClick={() => handleSort("storyPoint")}
         >
           Sort by Story Point

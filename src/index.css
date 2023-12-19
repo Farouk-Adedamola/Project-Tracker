@@ -22,4 +22,8 @@
   .label {
     @apply text-white text-lg font-bold;
   }
+
+  .sort-btn {
+    @apply text-sm font-bold rounded-[10px] py-3 px-2 bg-white;
+  }
 }
