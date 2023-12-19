@@ -16,6 +16,7 @@ const Layout = () => {
   const [editingProject, setEditingProject] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
+  //   const [date, setDate] = useState(getTodayDate());
 
   //
   // ******************************************************************
@@ -46,15 +47,6 @@ const Layout = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    // setFormData({
-    //   projectName: formData.projectName,
-    //   dueDate: formData.dueDate,
-    //   dateAdded: formData.dateAdded,
-    //   priority: formData.priority,
-    //   niche: formData.niche,
-    //   storyPoint: formData.storyPoint,
-    //   [name]: value,
-    // });
     setFormData({ ...formData, [name]: value });
   };
 
@@ -98,7 +90,6 @@ const Layout = () => {
 
     setFormData({
       projectName: "",
-      //   dateAdded: "",
       dueDate: "",
       priority: "",
       niche: "",
@@ -133,6 +124,7 @@ const Layout = () => {
         handleFormSubmit={handleFormSubmit}
         formData={formData}
         editingProject={editingProject}
+        // handleDateChange={handleDateChange}
       />
       <SortHelper
         setProjects={setProjects}

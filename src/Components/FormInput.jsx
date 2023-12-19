@@ -6,6 +6,7 @@ const FormInput = ({
   handleFormSubmit,
   formData,
   editingProject,
+  handleDateChange,
 }) => {
   return (
     <>
@@ -34,7 +35,7 @@ const FormInput = ({
               name="dateAdded"
               id="dateAdded"
               //   disabled
-              onChange={handleChange}
+              onChange={handleDateChange}
               value={formData.dateAdded}
               className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500"
             />
