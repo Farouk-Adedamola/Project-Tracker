@@ -30,27 +30,13 @@ const Tableoutput = ({
           <Table>
             <TableHead className="w-full">
               <TableRow className="bg-green-500">
-                <TableCell className="font-bold text-black text-center">
-                  Project Name
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Date Added
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Due Date
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Priority
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Niche
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Story Point
-                </TableCell>
-                <TableCell className="font-bold text-black text-center">
-                  Actions
-                </TableCell>
+                <TableCell className="cell">Project Name</TableCell>
+                <TableCell className="cell">Date Added</TableCell>
+                <TableCell className="cell">Due Date</TableCell>
+                <TableCell className="cell">Priority</TableCell>
+                <TableCell className="cell">Niche</TableCell>
+                <TableCell className="cell">Story Point</TableCell>
+                <TableCell className="cell">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -59,34 +45,34 @@ const Tableoutput = ({
                   key={project.id}
                   className="border-b-2 border-solid border-green-700"
                 >
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.projectName}
                   </TableCell>
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.dateAdded}
                   </TableCell>
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.dueDate}
                   </TableCell>
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.priority}
                   </TableCell>
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.niche}
                   </TableCell>
-                  <TableCell className="font-bold text-green-700 text-sm capitalize border-r-2 border-green-500 text-center">
+                  <TableCell className="cell-map-items">
                     {project.storyPoint}
                   </TableCell>
                   <TableCell className="font-bold text-green-700 text-sm capitalize flex justify-between gap-4 sm:justify-center items-center">
                     <button
                       onClick={() => handleDelete(project.id)}
-                      className="text-white bg-red-700 p-2 rounded-sm font-semibold hover:bg-red-500"
+                      className="cell-btn bg-red-700  hover:bg-red-500"
                     >
                       Delete
                     </button>
                     <button
                       onClick={() => handleEdit(project)}
-                      className="text-white bg-green-700 p-2 rounded-sm font-semibold hover:bg-green-500"
+                      className="cell-btn bg-green-700  hover:bg-green-500"
                     >
                       Edit
                     </button>

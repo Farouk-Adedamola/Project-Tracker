@@ -1,19 +1,18 @@
 // import React from 'react'
-import Tooltip from "@mui/material/Tooltip";
+import Tooltip from "@mui/material";
 
 const FormInput = ({
   handleChange,
   handleFormSubmit,
   formData,
   editingProject,
-  handleDateChange,
 }) => {
   return (
     <>
       <div className="container mx-auto  ">
         <form onSubmit={handleFormSubmit} className="mb-8 p-4">
           <div className="grid grid-cols-2 gap-2 w-full sm:grid-cols-4 lg:grid-cols-6 mb-8">
-            <label htmlFor="name" className="text-white text-sm font-bold">
+            <label htmlFor="name" className="label">
               ProjectName :
             </label>
             <Tooltip title="Add Project Name" followCursor>
@@ -24,22 +23,22 @@ const FormInput = ({
                 placeholder="Project Name"
                 onChange={handleChange}
                 value={formData.projectName}
-                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+                className="input"
               />
             </Tooltip>
-            <label htmlFor="date" className="text-white font-bold">
+            <label htmlFor="date" className="label">
               Date Added :
             </label>
             <input
               type="date"
               name="dateAdded"
               id="dateAdded"
-              //   disabled
-              onChange={handleDateChange}
+              disabled
+              onChange={handleChange}
               value={formData.dateAdded}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500"
+              className="input"
             />
-            <label htmlFor="date" className="text-white font-bold">
+            <label htmlFor="date" className="label">
               Date Due :
             </label>
             <input
@@ -48,9 +47,9 @@ const FormInput = ({
               id="dueDate"
               onChange={handleChange}
               value={formData.dueDate}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+              className="input"
             />
-            <label htmlFor="storypoint" className="text-white font-bold">
+            <label htmlFor="storypoint" className="label">
               {" "}
               storypoint :
             </label>
@@ -63,9 +62,9 @@ const FormInput = ({
               placeholder="input number from 1 -10"
               onChange={handleChange}
               value={formData.storyPoint}
-              className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+              className="input"
             />
-            <label htmlFor="niche" className="text-white font-bold">
+            <label htmlFor="niche" className="label">
               Niche :
             </label>
             <Tooltip title="Add Niche" followCursor>
@@ -76,10 +75,10 @@ const FormInput = ({
                 onChange={handleChange}
                 placeholder="Niche"
                 value={formData.niche}
-                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+                className="input"
               />
             </Tooltip>
-            <label htmlFor="Priority" className="text-white font-bold">
+            <label htmlFor="Priority" className="label">
               Priority :
             </label>
             <Tooltip title="high, medium, low" followCursor>
@@ -90,7 +89,7 @@ const FormInput = ({
                 placeholder="Priority"
                 onChange={handleChange}
                 value={formData.priority}
-                className="w-full sm:w-full outline-none px-2 py-1 rounded-sm text-black-500 font-bold"
+                className="input"
               />
             </Tooltip>
           </div>
@@ -106,24 +105,4 @@ const FormInput = ({
   );
 };
 
-// FormInput.propTypes = {
-//   formData: PropTypes.shape({
-//     projectName: PropTypes.string.isRequired,
-//     // define propTypes for other fields in formData as needed
-//   }).isRequired,
-//   onInputChange: PropTypes.func.isRequired,
-// };
-
 export default FormInput;
-
-// ChildComponent.propTypes = {
-//   formData: PropTypes.shape({
-//     projectName: PropTypes.string.isRequired,
-//     dateAdded: PropTypes.string.isRequired,
-//     dueDate: PropTypes.string.isRequired,
-//     priority: PropTypes.string.isRequired,
-//     niche: PropTypes.string.isRequired,
-//     storyPoint: PropTypes.string.isRequired,
-//   }).isRequired,
-//   onInputChange: PropTypes.func.isRequired,
-// };
