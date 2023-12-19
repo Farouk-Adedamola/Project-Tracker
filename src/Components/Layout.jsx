@@ -56,26 +56,20 @@ const Layout = () => {
     if (
       (formData.projectName,
       formData.dateAdded,
+      // keep,
       formData.dateDue,
       formData.priority,
       formData.storyPoint,
       formData.niche)
     ) {
       console.log({ ...formData });
+      //        const keep = setFormData(formData.dateAdded);
+      // console.log(keep)
       const newProject = {
         ...formData,
         id: new Date().getTime().toString(),
       };
       setProjects([...projects, newProject]);
-
-      // setFormData({
-      //   projectName: "",
-      //   dateAdded: "",
-      //   dueDate: "",
-      //   priority: "",
-      //   niche: "",
-      //   storyPoint: "",
-      // });
     }
     if (editingProject) {
       const updatedProjects = projects.map((project) =>
@@ -92,7 +86,7 @@ const Layout = () => {
 
     setFormData({
       projectName: "",
-      dateAdded: "",
+      dateAdded: new Date().toISOString().split("T")[0],
       dueDate: "",
       priority: "",
       niche: "",
