@@ -1,6 +1,3 @@
-// import React from 'react'
-// import { Button } from "@mui/material";
-
 const SortHelper = ({ setProjects, setSortCriteria, projects }) => {
   const handleSort = (criteria) => {
     const sortedProjects = [...projects];
