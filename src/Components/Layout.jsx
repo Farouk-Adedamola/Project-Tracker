@@ -3,6 +3,8 @@ import FormInput from "./FormInput";
 import Tableoutput from "./Tableoutput";
 import SortHelper from "./SortHelper";
 
+// Normally i dont have to set state for the dueDate it should work without controlling it
+
 const Layout = () => {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState({
@@ -16,7 +18,6 @@ const Layout = () => {
   const [editingProject, setEditingProject] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
-  //   const [date, setDate] = useState(getTodayDate());
 
   //
   // ******************************************************************
