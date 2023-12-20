@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "./FormInput";
 import Tableoutput from "./Tableoutput";
 import SortHelper from "./SortHelper";
 import { format } from "date-fns";
 
+const getLocalStorage = () => {
+  let projects = localStorage.getItem("projects");
+  if (projects) {
+    return JSON.parse(projects);
+  } else {
+    return [];
+  }
+};
+
 // Normally i dont have to set state for the dueDate it should work without controlling it
 
 const Layout = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(getLocalStorage());
   const [formData, setFormData] = useState({
     projectName: "",
     dateAdded: format(new Date(), "yyyy-MM-dd"),
@@ -19,9 +28,6 @@ const Layout = () => {
   const [editingProject, setEditingProject] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
-
-  //
-  // ******************************************************************
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -87,6 +93,10 @@ const Layout = () => {
     setEditingProject(editingProject);
     setIsEditDialogOpen(false);
   };
+
+  useEffect(() => {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }, [projects]);
 
   return (
     <>
