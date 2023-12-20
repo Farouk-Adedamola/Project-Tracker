@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormInput from "./FormInput";
 import Tableoutput from "./Tableoutput";
 import SortHelper from "./SortHelper";
+import { format } from "date-fns";
 
 // Normally i dont have to set state for the dueDate it should work without controlling it
 
@@ -9,7 +10,7 @@ const Layout = () => {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState({
     projectName: "",
-    dateAdded: "",
+    dateAdded: format(new Date(), "yyyy-MM-dd"),
     dueDate: "",
     priority: "",
     niche: "",
@@ -21,29 +22,6 @@ const Layout = () => {
 
   //
   // ******************************************************************
-  useEffect(() => {
-    // Update dateAdded in formData when the component mounts
-    setFormData((prevData) => ({
-      ...prevData,
-      dateAdded: getFormattedDate(),
-    }));
-  }, []); // Empty dependency array ensures that this effect runs only once, similar to componentDidMount
-
-  const getFormattedDate = () => {
-    // Get today's date
-    const today = new Date();
-
-    // Extract the components of the date
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1; // Month is zero-based, so we add 1
-    const day = today.getDate();
-
-    // Format the date as a string
-    return `${year}-${month < 10 ? "0" : ""}${month}-${
-      day < 10 ? "0" : ""
-    }${day}`;
-  };
-  // **********************************************************
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -57,15 +35,13 @@ const Layout = () => {
     if (
       (formData.projectName,
       formData.dateAdded,
-      // keep,
       formData.dateDue,
       formData.priority,
       formData.storyPoint,
       formData.niche)
     ) {
       console.log({ ...formData });
-      //        const keep = setFormData(formData.dateAdded);
-      // console.log(keep)
+
       const newProject = {
         ...formData,
         id: new Date().getTime().toString(),
@@ -87,12 +63,13 @@ const Layout = () => {
 
     setFormData({
       projectName: "",
-      dateAdded: new Date().toISOString().split("T")[0],
+      dateAdded: format(new Date(), "yyyy-MM-dd"),
       dueDate: "",
       priority: "",
       niche: "",
       storyPoint: "",
     });
+    console.log(format(new Date(), "yyyy-MM-dd"));
   };
 
   const handleDelete = (id) => {
