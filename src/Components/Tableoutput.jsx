@@ -147,6 +147,9 @@ const Tableoutput = ({
                   <input
                     type="number"
                     name="storyPoint"
+                    min={1}
+                    max={10}
+                    placeholder="1-5"
                     id="storypoint"
                     onChange={handleChange}
                     value={formData.storyPoint}
