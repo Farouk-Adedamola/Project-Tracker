@@ -22,6 +22,7 @@ const Tableoutput = ({
   isEditDialogOpen,
   handleEditDialogClose,
   formData,
+  serialNumber,
 }) => {
   return (
     <>
@@ -30,6 +31,7 @@ const Tableoutput = ({
           <Table>
             <TableHead className="w-full">
               <TableRow className="bg-green-500">
+                <TableCell className="cell">SN</TableCell>
                 <TableCell className="cell">Project Name</TableCell>
                 <TableCell className="cell">Date Added</TableCell>
                 <TableCell className="cell">Due Date</TableCell>
@@ -45,6 +47,9 @@ const Tableoutput = ({
                   key={project.id}
                   className="border-b-2 border-solid border-green-700"
                 >
+                  <TableCell className="cell-map-items">
+                    {serialNumber++}
+                  </TableCell>
                   <TableCell className="cell-map-items">
                     {project.projectName}
                   </TableCell>

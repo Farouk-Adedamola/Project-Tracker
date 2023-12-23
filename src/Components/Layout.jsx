@@ -28,6 +28,12 @@ const Layout = () => {
   const [editingProject, setEditingProject] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
+  const [serialNumber, setSerialNumber] = useState(generateSerialNumber());
+
+  function generateSerialNumber() {
+    const sN = projects.length + 1;
+    return sN;
+  }
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -47,6 +53,8 @@ const Layout = () => {
       formData.niche)
     ) {
       console.log({ ...formData });
+
+      setSerialNumber(serialNumber);
 
       const newProject = {
         ...formData,
@@ -79,6 +87,7 @@ const Layout = () => {
   };
 
   const handleDelete = (id) => {
+    // setSerialNumber(projects.length + 1);
     const updatedProjects = projects.filter((project) => project.id !== id);
     setProjects(updatedProjects);
   };
@@ -123,6 +132,7 @@ const Layout = () => {
         handleEdit={handleEdit}
         handleEditDialogClose={handleEditDialogClose}
         projects={projects}
+        serialNumber={serialNumber}
         isEditDialogOpen={isEditDialogOpen}
         formData={formData}
         handleFormSubmit={handleFormSubmit}
